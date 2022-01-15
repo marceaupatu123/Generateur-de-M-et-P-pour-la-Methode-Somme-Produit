@@ -1,3 +1,6 @@
+from ctypes import Array
+
+
 def primefactors(n: int):
     factors = []
    #Le but est de rendre n impair, tant qu'il est pair on affiche ajoute 2 au tableau
@@ -6,7 +9,7 @@ def primefactors(n: int):
       n = int(n / 2)
     
    #Les diviseurs vont de pairs, on s'arrete donc à srqt(n)+1 (voir https://math.stackexchange.com/questions/3875424/sieve-of-eratosthenes-why-can-we-stop-at-the-sqrt-n)
-    for i in range(3,int(n**0.5)+1,2):
+    for i in range(3,int(abs(n)**0.5)+1,2):
      
       while (n % i == 0):
          factors.append(i)
@@ -37,7 +40,7 @@ def genp(ac:int):
     return tableauDeToutesLesPossibilités
 
 # Test de M et P pour voir si m+p = b
-def MSP(ac:int, b:int):
+def MPS(ac:int, b:int):
     posibilities = genp(ac)
     for i in range(0,len(posibilities)):
         m = posibilities[i][0]
@@ -51,3 +54,5 @@ def MSP(ac:int, b:int):
         elif -m + -p == b:
             return [-m,-p]
     return "Aucun m et p valable."  
+
+print(MPS(-405, -12))
