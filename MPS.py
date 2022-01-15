@@ -1,5 +1,5 @@
 def primefactors(n: int):
-    factors = []
+    factors = [1]
    #Le but est de rendre n impair, tant qu'il est pair on affiche ajoute 2 au tableau
     while n % 2 == 0:
       factors.append(2),
@@ -51,3 +51,5 @@ def MPS(ac:int, b:int):
         elif -m + -p == b:
             return [-m,-p]
     return "Aucun m et p valable."  
+
+print(MPS(15*-4, -4))
