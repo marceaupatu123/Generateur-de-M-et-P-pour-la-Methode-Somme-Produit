@@ -1,6 +1,3 @@
-from ctypes import Array
-
-
 def primefactors(n: int):
     factors = []
    #Le but est de rendre n impair, tant qu'il est pair on affiche ajoute 2 au tableau
@@ -54,5 +51,3 @@ def MPS(ac:int, b:int):
         elif -m + -p == b:
             return [-m,-p]
     return "Aucun m et p valable."  
-
-print(MPS(-405, -12))
