@@ -1,4 +1,6 @@
-def primefactors(n: int):
+import math
+
+def primefactors(n):
     factors = [1]
    #Le but est de rendre n impair, tant qu'il est pair on affiche ajoute 2 au tableau
     while n % 2 == 0:
@@ -13,14 +15,13 @@ def primefactors(n: int):
          n = int(n / i)
     
     #Si il reste encore un nombre n > 2 c'est qu'il est un facteur du nombre.
-    if n > 2:
+    if n:
       factors.append(n)
       
     return factors
 
 #Cette fonction génère toutes les possibilités de somme via les facteurs
-def genp(ac:int):
-    factors = primefactors(ac)
+def genp(ac, factors):
     tableauDeToutesLesPossibilités = []
     tableau1 = factors.copy()
     tableau2 = []
@@ -36,9 +37,38 @@ def genp(ac:int):
         tableauDeToutesLesPossibilités.append([n1, n2])
     return tableauDeToutesLesPossibilités
 
+# Commute l'élément 0 et 1, 2 et 3...
+def PairFactors(factorsarray):
+    tableauareverse = factorsarray.copy()
+    tour = math.floor((len(tableauareverse)/2))
+    for i in range(0, tour+2, 2):
+        tableauareverse[i] , tableauareverse[i+1] = tableauareverse[i+1], tableauareverse[i]
+    return tableauareverse    
+
+# Commute l'élement 0 et 3, 3 et 4, 6 et 7...
+def ChangeBy3Factors(factorsarray):
+    tableauareverse = factorsarray.copy()
+    tour = math.floor((len(tableauareverse)/3)) +3
+    for i in range(0, tour, 3):
+        tableauareverse[i] , tableauareverse[i+1] = tableauareverse[i+1], tableauareverse[i]
+    return tableauareverse
+
+# Création d'une "super tableau" regroupant toutes les possibilités
+def Donnemoiunbeautableau(ac):
+    facteurs = primefactors(ac)
+    tableaunormal = genp(ac, facteurs)
+    tableaupair = genp(ac,PairFactors(facteurs))
+    tableauchangedby3 = genp(ac,ChangeBy3Factors(facteurs))
+    lepluscomplet = tableaunormal + tableaupair + tableauchangedby3
+    lepluscomplettrie = []
+    for i in lepluscomplet:
+        if i not in lepluscomplettrie:
+            lepluscomplettrie.append(i)
+    return lepluscomplettrie
+    
 # Test de M et P pour voir si m+p = b
-def MPS(ac:int, b:int):
-    posibilities = genp(ac)
+def MPS(ac, b):
+    posibilities = Donnemoiunbeautableau(ac)
     for i in range(0,len(posibilities)):
         m = posibilities[i][0]
         p = posibilities[i][1]
@@ -52,4 +82,4 @@ def MPS(ac:int, b:int):
             return [-m,-p]
     return "Aucun m et p valable."  
 
-print(MPS(15*-4, -4))
+print(MPS(4*25, 20))
