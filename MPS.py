@@ -53,7 +53,7 @@ def ChangeBy3Factors(factorsarray):
         tableauareverse[i] , tableauareverse[i+1] = tableauareverse[i+1], tableauareverse[i]
     return tableauareverse
 
-# Création d'une "super tableau" regroupant toutes les possibilités
+# Création d'un "super tableau" regroupant toutes les possibilités
 def Donnemoiunbeautableau(ac):
     facteurs = primefactors(ac)
     tableaunormal = genp(ac, facteurs)
