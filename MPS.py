@@ -1,7 +1,7 @@
 import math
 
 def primefactors(n):
-    factors = [1]
+    factors = []
    #Le but est de rendre n impair, tant qu'il est pair on affiche ajoute 2 au tableau
     while n % 2 == 0:
       factors.append(2),
@@ -41,19 +41,31 @@ def genp(ac, factors):
 def PairFactors(factorsarray):
     tableauareverse = factorsarray.copy()
     tour = math.floor((len(tableauareverse)/2))
-    for i in range(0, tour+2, 2):
-        tableauareverse[i] , tableauareverse[i+1] = tableauareverse[i+1], tableauareverse[i]
+    for i in range(0, tour*2, 2):
+        element = 1
+        while tableauareverse[i] == tableauareverse[i+element]:
+            if i+element < len(tableauareverse)-1:
+                element = element+1
+            else:
+                break
+        tableauareverse[i] , tableauareverse[i+element] = tableauareverse[i+element], tableauareverse[i]
     return tableauareverse    
 
 # Commute l'élement 0 et 3, 3 et 4, 6 et 7...
 def ChangeBy3Factors(factorsarray):
     tableauareverse = factorsarray.copy()
-    tour = math.floor((len(tableauareverse)/3)) +3
-    for i in range(0, tour, 3):
-        tableauareverse[i] , tableauareverse[i+1] = tableauareverse[i+1], tableauareverse[i]
+    tour = math.floor((len(tableauareverse)/3)) 
+    for i in range(0, tour*3, 3):
+        element = 1
+        while tableauareverse[i] == tableauareverse[i+element]:
+            if i+element < len(tableauareverse)-1:
+                element = element+1
+            else:
+                break
+        tableauareverse[i] , tableauareverse[i+element] = tableauareverse[i+element], tableauareverse[i]
     return tableauareverse
 
-# Création d'un "super tableau" regroupant toutes les possibilités
+# Création d'une "super tableau" regroupant toutes les possibilités
 def Donnemoiunbeautableau(ac):
     facteurs = primefactors(ac)
     tableaunormal = genp(ac, facteurs)
@@ -82,4 +94,12 @@ def MPS(ac, b):
             return [-m,-p]
     return "Aucun m et p valable."  
 
-print(MPS(4*25, 20))
+# Listes de Tests de Trinomes
+# print(MPS(4*25, 20))
+# print(MPS(16*9, 24))
+# print(MPS(15*-4, -4))
+# print(MPS(12, 7))
+# print(MPS(-32, 4))
+# print(MPS(6*8, 16))
+# print(MPS(3*4, 8))
+# print(MPS(12*32,56))
